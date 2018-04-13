@@ -1,0 +1,23 @@
+{
+  "name": "eggheadio-introduction-to-reactive-programming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larrybotha/eggheadio-introduction-to-reactive-programming.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larrybotha/eggheadio-introduction-to-reactive-programming/issues"
+  },
+  "homepage": "https://github.com/larrybotha/eggheadio-introduction-to-reactive-programming#readme",
+  "dependencies": {
+    "rxjs": "^5.5.10"
+  }
+}
