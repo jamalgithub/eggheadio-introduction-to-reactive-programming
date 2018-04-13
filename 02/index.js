@@ -34,3 +34,8 @@ const doubleClick$ = click$
 doubleClick$.subscribe(e => {
   label.textContent = 'double click';
 });
+
+// create a new stream from the doubleClick stream and subscribe to it
+// When the doubleClick stream receives an event, after 1000ms do something.
+// In this case, reset the label text
+doubleClick$.delay(1000).subscribe(suggestion => (label.textContent = '-'));
