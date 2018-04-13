@@ -28,3 +28,9 @@ const doubleClick$ = click$
   .map(arr => arr.length)
   // filter out the events that are not 2 in length
   .filter(len => len == 2);
+
+// subscribe to the doubleClick stream
+// Every time we receive an event, output the text into the label
+doubleClick$.subscribe(e => {
+  label.textContent = 'double click';
+});
