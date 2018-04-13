@@ -7,3 +7,5 @@ const button = document.querySelector('button');
 // a counter
 // a timer
 // With reactive streams we don't need any of that
+
+const click$ = Observable.fromEvent(button, 'click');
