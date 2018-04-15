@@ -12,3 +12,17 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 02
     ```
+3. [Why hoose RxJs]('./03/index.js')
+
+    Key takeaway:
+
+    Why should one use event streams?
+
+    > Event streams allow one to specify the dynamic behaviour of a value
+    > completely at the time of declaration.
+
+    ^ this sounds awfully similar to *determinism* in state charts
+
+    ```bash
+    $ node 03
+    ```
