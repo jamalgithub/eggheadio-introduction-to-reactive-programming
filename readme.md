@@ -28,6 +28,11 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```
 4. [Async requests and responses](./04/index.js)
 
+    Takeaway:
+
+    Use `Rx.Observable.flatMap` to flatten nested Observables and allow for
+    working with only a single level of events / values in a stream.
+
     ```bash
     $ npx live-server 04
     ```
