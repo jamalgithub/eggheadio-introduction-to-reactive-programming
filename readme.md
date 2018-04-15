@@ -26,3 +26,8 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ node 03
     ```
+4. [Async requests and responses](./04/index.js)
+
+    ```bash
+    $ npx live-server 04
+    ```
