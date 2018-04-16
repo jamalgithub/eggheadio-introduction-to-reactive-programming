@@ -36,3 +36,8 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 04
     ```
+5. [Render on the Dom](./05/index.js)
+
+    ```bash
+    $ npx live-server 05
+    ```
