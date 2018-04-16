@@ -41,3 +41,8 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 05
     ```
+6. [Send new requests from refresh clicks](./06/index.js)
+
+    ```bash
+    $ npx live-server 06
+    ```
