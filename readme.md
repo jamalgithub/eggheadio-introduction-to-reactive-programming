@@ -55,6 +55,8 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
         s---a-----b-------c--->
         ```
 
+        http://rxmarbles.com/#merge
+
     ```bash
     $ npx live-server 06
     ```
