@@ -41,3 +41,20 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 05
     ```
+6. [Send new requests from refresh clicks](./06/index.js)
+
+    Takeaways:
+
+    - streams don't do anything until they are subscribed to
+    - `merge` will take two streams and create a new stream of those streams:
+
+        ```
+        ----a-----b-------c--->
+        s--------------------->
+                 merge
+        s---a-----b-------c--->
+        ```
+
+    ```bash
+    $ npx live-server 06
+    ```
