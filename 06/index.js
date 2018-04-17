@@ -14,6 +14,29 @@ const requestOnRefresh$ = refreshClick$.map(() => {
 // this is now our original stream we were using to make requests in our
 // request stream
 const startupRequest$ = Rx.Observable.of('https://api.github.com/users');
+
+// we get the random URL from our request stream every time the refresh button
+// is clicked.
+// The problem here is that until the refresh button is clicked, no request is
+// made.
+// We need to have an initial request for our response stream, after which we
+// can handle refresh clicks
+// This can be done by using 'merge'
+// 'merge' returns results for either one stream or the other in a new stream:
+// ----a-----b-------c---> (refresh stream)
+// s---------------------> (startup stream)
+//          merge
+// s---a-----b-------c--->
+const response$ = requestOnRefresh$
+  // merge requestOnRefresh and the startupRequest streams
+  .merge(startupRequest$)
+  // map over the URLs
+  .flatMap(url => {
+    return Rx.Observable.from(fetch(url)).flatMap(res =>
+      Rx.Observable.from(res.json())
+    );
+  });
+
 const createSuggestion$ = res$ => {
   return res$.map(
     listUser => listUser[Math.floor(Math.random() * listUser.length)]
