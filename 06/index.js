@@ -1,10 +1,5 @@
-const request$ = Rx.Observable.of('https://api.github.com/users');
 const refreshButton = document.querySelector('.js-refresh');
 
-const response$ = request$.flatMap(url => {
-  return Rx.Observable.from(fetch(url)).flatMap(res =>
-    Rx.Observable.from(res.json())
-  );
 // this is just a click stream - it's not mapped to a URL at this point
 const refreshClick$ = Rx.Observable.fromEvent(refreshButton, 'click');
 
@@ -16,6 +11,9 @@ const requestOnRefresh$ = refreshClick$.map(() => {
   return `https://api.github.com/users?since=${randomOffset}`;
 });
 
+// this is now our original stream we were using to make requests in our
+// request stream
+const startupRequest$ = Rx.Observable.of('https://api.github.com/users');
 const createSuggestion$ = res$ => {
   return res$.map(
     listUser => listUser[Math.floor(Math.random() * listUser.length)]
