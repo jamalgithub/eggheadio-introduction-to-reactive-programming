@@ -60,3 +60,25 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 06
     ```
+7. [Send new requests from refresh clicks](./07/index.js)
+
+    Takeaways:
+
+    - use `startWith` to provide an initial value for a stream
+    - use `merge` to take an existing stream and place values from that stream,
+        or calculated from that stream, into the current stream
+
+        ```
+        ----------u-------u-> (we get a response for a user)
+           startWith(N)
+        N---------u--------->
+        -------------N--N---> (when refresh is clicked, we get null)
+               merge
+        N---------u--N--N-u-> (merge everything)
+        ```
+
+        http://rxmarbles.com/#startWith
+
+    ```bash
+    $ npx live-server 07
+    ```
