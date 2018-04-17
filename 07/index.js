@@ -35,6 +35,14 @@ const suggestion1$ = createSuggestion$(response$);
 const suggestion2$ = createSuggestion$(response$);
 const suggestion3$ = createSuggestion$(response$);
 
+// clear the users when we don't have data
+// This is not good, because we're contradicting the mantra that we need to
+// specify dynamic behaviour at the time of declaration. This needs to be
+// moved into a stream
+// renderSuggestion(null, '.js-suggestion-1');
+// renderSuggestion(null, '.js-suggestion-2');
+// renderSuggestion(null, '.js-suggestion-3');
+
 suggestion1$.subscribe(user => renderSuggestion(user, '.js-suggestion-1'));
 suggestion2$.subscribe(user => renderSuggestion(user, '.js-suggestion-2'));
 suggestion3$.subscribe(user => renderSuggestion(user, '.js-suggestion-3'));
