@@ -19,10 +19,30 @@ const response$ = requestOnRefresh$
   );
 
 const createSuggestion$ = res$ =>
-  res$.map(listUser => listUser[Math.floor(Math.random() * listUser.length)]);
+  res$
+    .map(listUser => listUser[Math.floor(Math.random() * listUser.length)])
+    // instead of defining 'null' for our users outside of a stream, we can
+    // indicate what out stream should begin with - in this case null
+    // startWith:
+    // ----------u-------u-> (we get a response for a user)
+    //    startWith(N)
+    // N---------u--------->
+    // -------------N--N---> (when refresh is clicked, we get null)
+    //        merge
+    // N---------u--N--N-u-> (merge everything)
+    .startWith(null)
+    // merge a stream of null values every time the refreshClick stream receives
+    // an event
+    .merge(refreshClick$.map(_ => null));
 
 const renderSuggestion = (user, selector) => {
   const el = document.querySelector(selector);
+
+  if (user === null) {
+    el.style.visibility = 'hidden';
+    return;
+  }
+
   const usernameEl = el.querySelector('.js-username');
 
   usernameEl.href = user.html_url;
