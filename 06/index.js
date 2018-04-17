@@ -1,9 +1,19 @@
 const request$ = Rx.Observable.of('https://api.github.com/users');
+const refreshButton = document.querySelector('.js-refresh');
 
 const response$ = request$.flatMap(url => {
   return Rx.Observable.from(fetch(url)).flatMap(res =>
     Rx.Observable.from(res.json())
   );
+// this is just a click stream - it's not mapped to a URL at this point
+const refreshClick$ = Rx.Observable.fromEvent(refreshButton, 'click');
+
+// whenever the refresh button is clicked...
+const requestOnRefresh$ = refreshClick$.map(() => {
+  const randomOffset = Math.floor(Math.random() * 500);
+
+  // return a random URL
+  return `https://api.github.com/users?since=${randomOffset}`;
 });
 
 const createSuggestion$ = res$ => {
