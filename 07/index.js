@@ -43,12 +43,14 @@ const renderSuggestion = (user, selector) => {
     return;
   }
 
+  el.style.visibility = 'visible';
   const usernameEl = el.querySelector('.js-username');
 
   usernameEl.href = user.html_url;
   usernameEl.textContent = user.login;
 
   const imgEl = el.querySelector('img');
+  imgEl.src = user.avatar_url;
 };
 
 const suggestion1$ = createSuggestion$(response$);
