@@ -23,10 +23,14 @@ const renderSuggestion = (user, selector) => {
   imgEl.src = user.avatar_url;
 };
 
+// when working with event streams the idea is that we create them but without
+// doing anything to them
 const suggestion1$ = createSuggestion$(response$);
 const suggestion2$ = createSuggestion$(response$);
 const suggestion3$ = createSuggestion$(response$);
 
+// Once we've created them, then we subscribe to them at which point we can do
+// whatever we want with the events
 suggestion1$.subscribe(user => renderSuggestion(user, '.js-suggestion-1'));
 suggestion2$.subscribe(user => renderSuggestion(user, '.js-suggestion-2'));
 suggestion3$.subscribe(user => renderSuggestion(user, '.js-suggestion-3'));
