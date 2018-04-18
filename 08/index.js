@@ -12,11 +12,22 @@ const startupRequest$ = Rx.Observable.of('https://api.github.com/users');
 
 const response$ = requestOnRefresh$
   .merge(startupRequest$)
-  .flatMap(url =>
-    Rx.Observable.from(fetch(url)).flatMap(res =>
+  .flatMap(url => {
+    // let's naively track network requests
+    console.log('network request');
+
+    return Rx.Observable.from(fetch(url)).flatMap(res =>
       Rx.Observable.from(res.json())
-    )
-  );
+    );
+  })
+  // Andre says it's useful to think of streams as videos. Two people can watch
+  // the same video on different devices - each making their own network requests,
+  // or they can share the network by watching on a single screen.
+  // That's what shareReplay does for streams - any subscriptions to a stream
+  // that is using shareReplay are now shared, and any later subscriptions
+  // receive all the previous events
+  // Now we have the 3 network requests consolidated into a single request
+  .shareReplay(1);
 
 const createSuggestion$ = res$ =>
   res$
