@@ -53,10 +53,15 @@ const renderSuggestion = (user, selector) => {
   imgEl.src = user.avatar_url;
 };
 
+// over here we have 3 separate streams...
 const suggestion1$ = createSuggestion$(response$);
 const suggestion2$ = createSuggestion$(response$);
 const suggestion3$ = createSuggestion$(response$);
+const suggestion4$ = createSuggestion$(response$);
 
+// and here we have 3 separate subscriptions. If we don't indicate to the
+// original stream that these subscribers are all referring to, then we end up
+// making 3 separate network requests, instead of making a single request
 suggestion1$.subscribe(user => renderSuggestion(user, '.js-suggestion-1'));
 suggestion2$.subscribe(user => renderSuggestion(user, '.js-suggestion-2'));
 suggestion3$.subscribe(user => renderSuggestion(user, '.js-suggestion-3'));
