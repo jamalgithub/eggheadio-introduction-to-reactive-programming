@@ -82,3 +82,9 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 07
     ```
+8. [Share network requests](./08/index.js)
+
+
+    ```bash
+    $ npx live-server 08
+    ```
