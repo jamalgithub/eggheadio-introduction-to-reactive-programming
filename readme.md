@@ -103,6 +103,14 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```
 9. [Use cached network data](./09/index.js)
 
+    Takeways:
+
+    `withLatestFrom` allows one to receive events from one stream, and combine
+    them with the last emitted event from another stream to create a new stream
+    of combined values.
+
+    https://www.learnrxjs.io/operators/combination/withlatestfrom.html
+
     ```bash
     $ npx live-server 09
     ```
