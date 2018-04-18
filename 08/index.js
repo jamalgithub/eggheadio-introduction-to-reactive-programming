@@ -60,3 +60,13 @@ const suggestion3$ = createSuggestion$(response$);
 suggestion1$.subscribe(user => renderSuggestion(user, '.js-suggestion-1'));
 suggestion2$.subscribe(user => renderSuggestion(user, '.js-suggestion-2'));
 suggestion3$.subscribe(user => renderSuggestion(user, '.js-suggestion-3'));
+
+// if we delay this subscription we can see there are no additional network
+// requests made when the profile loads
+// If we had only used 'share' instead of 'shareReplay' on the request stream,
+// this subscription would not have any data until the user clicks refresh
+setTimeout(
+  () =>
+    suggestion4$.subscribe(user => renderSuggestion(user, '.js-suggestion-4')),
+  3000
+);
