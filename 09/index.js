@@ -16,22 +16,43 @@ const requestOnRefresh$ = refreshClick$.map(() => {
 
 const startupRequest$ = Rx.Observable.of('https://api.github.com/users');
 
-const response$ = requestOnRefresh$
-  .merge(startupRequest$)
-  .flatMap(url => {
-    console.log('network request');
+const request$ = requestOnRefresh$.merge(startupRequest$);
 
-    return Rx.Observable.from(fetch(url)).flatMap(res =>
+const response$ = request$
+  .flatMap(url =>
+    Rx.Observable.from(fetch(url)).flatMap(res =>
       Rx.Observable.from(res.json())
-    );
-  })
+    )
+  )
   .shareReplay(1);
 
-const createSuggestion$ = res$ =>
+// refreshClick$ ---------f------------------> (refreshing)
+// request$      r--------r------------------> (making requests)
+// response$     ----R-----------R-----------> (getting a response from the request)
+// closeClick$   ----R-----------R------x----> (when close clicked, map to a new user)
+// suggestion1$  N---u----N------u------u----> (either null, or a user)
+
+const getRandomUser = users => users[Math.floor(Math.random() * users.length)];
+
+const createSuggestion$ = (res$, closeClick$) =>
   res$
     .map(listUser => listUser[Math.floor(Math.random() * listUser.length)])
     .startWith(null)
-    .merge(refreshClick$.map(_ => null));
+    .merge(refreshClick$.map(_ => null))
+    // we need to get a new user whenever the closeClick$ emits an event.
+    // We need to get it into this stream, so we can use merge to do that
+    .merge(
+      // withLatestFrom allows one to make use of the latest values from an
+      // existing stream.
+      // Not only are we getting the click events now, but also the latest value
+      // emitted from the response stream
+      // We use the latest value from the response stream to return a random user
+      // every time the suggestion's close button is clicked
+      closeClick$.withLatestFrom(res$, (event, users) => {
+        console.log(event, users);
+        return getRandomUser(users);
+      })
+    );
 
 const renderSuggestion = (user, selector) => {
   const el = document.querySelector(selector);
