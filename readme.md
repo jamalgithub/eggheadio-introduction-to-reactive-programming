@@ -84,6 +84,19 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```
 8. [Share network requests](./08/index.js)
 
+    Takeaways:
+
+    `shareReplay` allows a stream to broadcast network requests to multiple
+    subscriptions without creating a new stream each time. We can now use a
+    single network request with multiple subscribers.
+
+    `shareReplay` also caches the stream, allowing any subscribers coming at a
+    later time access to all the events that happened in the past. This can be
+    seen with the `setTimeout` example in `index.js`.
+
+    If `share` were used instead of `shareReplay` then on first load the
+    subscriber created inside the `setTimeout` would have no data to output. It
+    would, however, have data once the user clicks refresh.
 
     ```bash
     $ npx live-server 08
