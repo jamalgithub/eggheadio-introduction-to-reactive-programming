@@ -101,3 +101,8 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 08
     ```
+9. [Use cached network data](./09/index.js)
+
+    ```bash
+    $ npx live-server 09
+    ```
