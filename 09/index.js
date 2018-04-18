@@ -1,6 +1,12 @@
 const refreshButton = document.querySelector('.js-refresh');
+const closeButton1 = document.querySelector('.js-close-1');
+const closeButton2 = document.querySelector('.js-close-2');
+const closeButton3 = document.querySelector('.js-close-3');
 
 const refreshClick$ = Rx.Observable.fromEvent(refreshButton, 'click');
+const close1Click$ = Rx.Observable.fromEvent(closeButton1, 'click');
+const close2Click$ = Rx.Observable.fromEvent(closeButton2, 'click');
+const close3Click$ = Rx.Observable.fromEvent(closeButton3, 'click');
 
 const requestOnRefresh$ = refreshClick$.map(() => {
   const randomOffset = Math.floor(Math.random() * 500);
@@ -45,10 +51,9 @@ const renderSuggestion = (user, selector) => {
   imgEl.src = user.avatar_url;
 };
 
-const suggestion1$ = createSuggestion$(response$);
-const suggestion2$ = createSuggestion$(response$);
-const suggestion3$ = createSuggestion$(response$);
-const suggestion4$ = createSuggestion$(response$);
+const suggestion1$ = createSuggestion$(response$, close1Click$);
+const suggestion2$ = createSuggestion$(response$, close2Click$);
+const suggestion3$ = createSuggestion$(response$, close3Click$);
 
 suggestion1$.subscribe(user => renderSuggestion(user, '.js-suggestion-1'));
 suggestion2$.subscribe(user => renderSuggestion(user, '.js-suggestion-2'));
