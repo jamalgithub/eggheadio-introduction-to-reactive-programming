@@ -12,7 +12,7 @@ Learnings and annotations from https://egghead.io/courses/introduction-to-reacti
     ```bash
     $ npx live-server 02
     ```
-3. [Why hoose RxJs]('./03/index.js')
+3. [Why choose RxJs]('./03/index.js')
 
     Key takeaway:
 
